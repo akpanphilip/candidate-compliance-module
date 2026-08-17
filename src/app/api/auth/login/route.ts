@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import { NextRequest } from 'next/server';
 import { z } from 'zod';
 
@@ -6,7 +7,7 @@ import { prisma } from '@/src/lib/db';
 
 const loginSchema = z.object({
   email: z.string().email(),
-  tenantId: z.string().min(1),
+  password: z.string().min(1, 'Password is required'),
 });
 
 export async function POST(req: NextRequest) {
@@ -14,26 +15,38 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const data = loginSchema.parse(body);
 
-    const user = await prisma.user.findFirst({
-      where: {
-        email: data.email,
-        tenantId: data.tenantId,
-      },
+    const user = await prisma.user.findUnique({
+      where: { email: data.email },
+      include: { tenant: true },
     });
 
     if (!user) {
       return Response.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    const jwt = signToken({
+    const passwordMatches = await bcrypt.compare(data.password, user.passwordHash);
+
+    if (!passwordMatches) {
+      return Response.json({ error: 'Invalid credentials' }, { status: 401 });
+    }
+
+    const appUser = {
       id: user.id,
       email: user.email,
       name: user.name,
-      role: user.role,
+      role: user.role as 'admin' | 'recruiter' | 'viewer',
       tenantId: user.tenantId,
-    });
+    };
 
-    return Response.json({ token: jwt, user }, { status: 200 });
+    const token = signToken(appUser);
+
+    return Response.json(
+      {
+        token,
+        user: { ...appUser, tenantName: user.tenant.name },
+      },
+      { status: 200 },
+    );
   } catch (error) {
     if (error instanceof z.ZodError) {
       return Response.json({ error: error.issues[0].message }, { status: 400 });

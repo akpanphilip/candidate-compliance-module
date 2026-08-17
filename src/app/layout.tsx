@@ -1,5 +1,13 @@
 import type { Metadata } from 'next';
+import { Sora } from 'next/font/google';
+
 import './globals.css';
+
+const sora = Sora({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sora',
+});
 
 export const metadata: Metadata = {
   title: 'E3OS Candidate Compliance',
@@ -8,8 +16,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={sora.variable}>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

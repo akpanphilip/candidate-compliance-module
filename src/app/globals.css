@@ -1,16 +1,10 @@
-* {
-  box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background: #f4f7fb;
-  color: #111827;
-}
-
-button,
-input {
-  font: inherit;
+@layer base {
+  html,
+  body {
+    @apply bg-slate-50 text-slate-900;
+  }
 }

@@ -1,11 +1,14 @@
 import jwt from 'jsonwebtoken';
 import { NextRequest } from 'next/server';
 
+export const ROLES = ['admin', 'recruiter', 'viewer'] as const;
+export type Role = (typeof ROLES)[number];
+
 export type AppUser = {
   id: string;
   email: string;
   name: string;
-  role: string;
+  role: Role;
   tenantId: string;
 };
 
@@ -53,8 +56,8 @@ export function requireAuth(req: NextRequest) {
   }
 }
 
-export function requireRole(user: AppUser, role: string) {
-  if (user.role !== role) {
+export function requireRole(user: AppUser, allowedRoles: Role[]) {
+  if (!allowedRoles.includes(user.role)) {
     throw new Error('Forbidden');
   }
 }

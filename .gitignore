@@ -6,3 +6,6 @@ coverage
 .env.local
 npm-debug.log*
 .DS_Store
+*.db
+*.db-journal
+*.tsbuildinfo
