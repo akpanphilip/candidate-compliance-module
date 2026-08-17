@@ -36,9 +36,9 @@ export default function LoginCard({
       <div className="w-full max-w-sm">
         <div className="mb-6 text-center">
           <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-600 text-lg font-semibold text-white shadow-sm">
-            E3
+            CC
           </div>
-          <h1 className="text-xl font-semibold text-slate-900">E3OS Compliance</h1>
+          <h1 className="text-xl font-semibold text-slate-900">Compliance Tracker</h1>
           <p className="mt-1 text-sm text-slate-500">Candidate &amp; compliance tracking</p>
         </div>
 
