@@ -1,6 +1,8 @@
-# E3OS Candidate Compliance Mini-Module
+# Candidate Compliance Module
 
-A small full-stack implementation of the E3OS take-home assessment: a tenant-aware candidate and compliance-document workflow built with Next.js, Prisma, and SQLite.
+A small full-stack implementation of a take-home assessment: a tenant-aware candidate and compliance-document workflow built with Next.js, Prisma, and SQLite.
+
+> The assessment brief asked that this not be published with the hiring company's name attached, so this README and the app itself are kept generic on purpose.
 
 ## Features
 

@@ -21,8 +21,8 @@ import {
   login as loginRequest,
 } from '@/src/lib/api-client';
 
-const STORAGE_TOKEN = 'e3os-token';
-const STORAGE_USER = 'e3os-user';
+const STORAGE_TOKEN = 'compliance-tracker-token';
+const STORAGE_USER = 'compliance-tracker-user';
 
 type DeleteTarget = { kind: 'candidate' | 'document'; id: string; label: string };
 
