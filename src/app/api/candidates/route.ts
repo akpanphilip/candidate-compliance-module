@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { z } from 'zod';
 
-import { requireAuth, resolveTenantId } from '@/src/lib/auth';
+import { requireAuth, requireRole, resolveTenantId } from '@/src/lib/auth';
 import { prisma } from '@/src/lib/db';
 
 const createCandidateSchema = z.object({
@@ -32,10 +32,7 @@ export async function POST(req: NextRequest) {
   try {
     const user = requireAuth(req);
     const tenantId = resolveTenantId(req, user);
-
-    if (user.role !== 'recruiter') {
-      return Response.json({ error: 'Only recruiters may create candidates' }, { status: 403 });
-    }
+    requireRole(user, ['admin', 'recruiter']);
 
     const body = await req.json();
     const data = createCandidateSchema.parse(body);
