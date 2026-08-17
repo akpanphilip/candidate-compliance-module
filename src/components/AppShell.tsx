@@ -9,7 +9,7 @@ export default function AppShell({ user, onLogout, children }: { user: AuthUser;
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-sm font-semibold text-white">
-              E3
+              CC
             </div>
             <div>
               <p className="text-sm font-semibold text-slate-900">Candidate Compliance</p>

@@ -10,7 +10,7 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: 'E3OS Candidate Compliance',
+  title: 'Candidate Compliance',
   description: 'Tenant-aware candidate compliance mini-module',
 };
 
