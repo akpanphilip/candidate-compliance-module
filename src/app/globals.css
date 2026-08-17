@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4f7fb;
+  color: #111827;
+}
+
+button,
+input {
+  font: inherit;
+}

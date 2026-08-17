@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id          String    @id @default(uuid())
+  name        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  candidates  Candidate[]
+  users       User[]
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  name       String
+  role       String   @default("recruiter")
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Candidate {
+  id            String               @id @default(uuid())
+  tenantId      String
+  tenant        Tenant               @relation(fields: [tenantId], references: [id])
+  name          String
+  email         String
+  roleAppliedFor String
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  documents     ComplianceDocument[]
+
+  @@index([tenantId])
+}
+
+model ComplianceDocument {
+  id          String   @id @default(uuid())
+  tenantId    String
+  candidateId String
+  candidate   Candidate @relation(fields: [candidateId], references: [id])
+  type        String
+  issueDate   DateTime
+  expiryDate  DateTime
+  status      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([candidateId])
+}

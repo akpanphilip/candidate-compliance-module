@@ -1,0 +1,40 @@
+{
+  "name": "e30s",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0 --port 3000",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0 --port 3000",
+    "lint": "next lint",
+    "test": "vitest run",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "seed": "npx tsx src/lib/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "jsonwebtoken": "^9.0.3",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.2.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitest/coverage-v8": "^4.1.10",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.15",
+    "prisma": "^5.22.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.5.4",
+    "vitest": "^4.1.10"
+  }
+}
